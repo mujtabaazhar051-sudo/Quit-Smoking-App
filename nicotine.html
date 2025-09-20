@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>نکوٹین ریپلیسمنٹ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero.small-hero { height: 32vh; }
+
+    .nr-wrap{
+      max-width: 1000px;
+      margin: 0 auto 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .nr-card{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:14px;
+      padding:16px;
+      box-shadow:0 4px 16px rgba(0,0,0,.08);
+    }
+    .nr-head{ display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+    .nr-emoji{
+      width:44px; height:44px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.5rem;
+      background: radial-gradient(60% 60% at 35% 30%, rgba(255,77,77,.15), rgba(255,77,77,.06));
+      box-shadow: inset 0 0 0 1px rgba(255,77,77,.18);
+      flex:0 0 44px;
+    }
+    .nr-card h3{ margin:0; font-size:1.15rem; }
+    .nr-card p{ margin:8px 0 0; line-height:1.7; }
+    .nr-list{ margin:8px 0 0; padding-inline-start:18px; line-height:1.8; }
+    .nr-note{
+      max-width:1000px; margin:14px auto 0;
+      background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:14px;
+      box-shadow:0 3px 12px rgba(0,0,0,.06); color:#333;
+    }
+    .nr-section-title{ text-align:center; margin:22px 0 10px; font-size:1.3rem; }
+
+    /* Helper styles */
+    .helper{
+      max-width: 1000px; margin: 0 auto 28px;
+      background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:14px; padding:16px;
+      box-shadow:0 4px 16px rgba(0,0,0,.08);
+    }
+    .helper h3{ margin:0 0 10px; font-size:1.15rem; }
+    .helper .row{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:8px; }
+    .helper .opt{
+      display:flex; gap:8px; align-items:center; background:#fafafa; border:1px solid #eee;
+      border-radius:10px; padding:10px; cursor:pointer;
+    }
+    .helper .opt input{ transform:scale(1.1); }
+    .helper .actions{ margin-top:12px; text-align:center; }
+    .helper .result{
+      margin-top:14px; background:#f9f9f9; border:1px dashed #ddd; border-radius:10px; padding:12px; display:none;
+    }
+    .helper .disclaimer{ font-size:.95rem; color:#555; margin-top:8px; }
+
+    /* LTR adjustments */
+    .ltr-mode .nr-wrap, .ltr-mode .nr-card, .ltr-mode .nr-list,
+    .ltr-mode .nr-note, .ltr-mode .helper, .ltr-mode .helper .row, .ltr-mode .helper .opt { direction:ltr; text-align:left; }
+
+    @media (min-width:700px){
+      .helper .row{ grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:520px){
+      .nr-wrap{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="btn-ur" class="lang-btn active">اردو</button>
+    <button id="btn-en" class="lang-btn">English</button>
+  </div>
+
+  <!-- Header -->
+  <section class="hero small-hero">
+    <div class="hero-content">
+      <h1 id="title">نکوٹین ریپلیسمنٹ</h1>
+      <p id="subtitle">NRT، بیوپروپیون، ویرینکلین — مختصر گائیڈ</p>
+    </div>
+  </section>
+
+  <!-- Helper: Which option fits me? -->
+  <section class="app-section">
+    <div class="helper" id="helper">
+      <h3 id="helperTitle">میرے لئے کون سا آپشن بہتر ہو سکتا ہے؟</h3>
+      <div class="row">
+        <label class="opt">
+          <input type="radio" name="urge" value="sudden">
+          <span id="q1a">میری خواہشیں اچانک اور تیز آتی ہیں</span>
+        </label>
+        <label class="opt">
+          <input type="radio" name="urge" value="allDay">
+          <span id="q1b">پورا دن ہلکی لیکن مسلسل خواہش رہتی ہے</span>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="opt">
+          <input type="radio" name="hands" value="yes">
+          <span id="q2a">مجھے ہاتھ سے کچھ پکڑنے/منہ مصروف رکھنے کی عادت ہے</span>
+        </label>
+        <label class="opt">
+          <input type="radio" name="hands" value="no">
+          <span id="q2b">ایسی کوئی خاص عادت نہیں</span>
+        </label>
+      </div>
+
+      <div class="row">
+        <label class="opt">
+          <input type="radio" name="presc" value="ok">
+          <span id="q3a">میں ڈاکٹر سے نسخہ لانے میں ٹھیک ہوں</span>
+        </label>
+        <label class="opt">
+          <input type="radio" name="presc" value="preferNRT">
+          <span id="q3b">فی الحال نسخہ نہیں چاہتا/چاہتی</span>
+        </label>
+      </div>
+
+      <div class="actions">
+        <button class="cta-btn" id="btnSuggest">مشورہ دیکھیں</button>
+      </div>
+
+      <div class="result" id="helperResult"></div>
+      <div class="disclaimer" id="helperDisclaimer">
+        یہ عمومی معلومات ہے، طبی مشورہ نہیں — مناسب انتخاب کیلئے ہمیشہ ہیلتھ پروفیشنل سے مشورہ کریں۔
+      </div>
+    </div>
+  </section>
+
+  <!-- Urdu content -->
+  <section class="app-section" id="contentUr">
+    <h2 class="nr-section-title">نکوٹین ریپلیسمنٹ تھراپی (NRT)</h2>
+    <div class="nr-wrap">
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🧃</div><h3>نکوٹین گم</h3></div>
+        <p>چبانے سے منہ میں نکوٹین آہستہ جذب ہوکر خواہش کم کرتی ہے۔ عام طور پر 2mg یا 4mg ڈوز۔</p>
+        <ul class="nr-list">
+          <li><strong>طریقہ:</strong> چبائیں، پارک کریں (گال میں رکھیں)، پھر دوبارہ چبائیں — 30 منٹ تک۔</li>
+          <li><strong>کب مفید:</strong> اچانک آنے والی cravings کے وقت۔</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🩹</div><h3>نکوٹین پیچ</h3></div>
+        <p>جلد پر لگانے سے پورے دن میں مسلسل نکوٹین ملتی ہے؛ صبح لگائیں، 16–24 گھنٹے تک رہتا ہے۔</p>
+        <ul class="nr-list">
+          <li><strong>طریقہ:</strong> صاف خشک جلد پر روزانہ نیا پیچ؛ جگہیں بدلیں۔</li>
+          <li><strong>کب مفید:</strong> دن بھر کی بنیادی craving کم رکھنے کیلئے۔</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🍬</div><h3>لوزینجز/ماؤتھ اسپرے/انہیلر</h3></div>
+        <p>منہ کے ذریعے نکوٹین کی آہستہ فراہمی؛ فوری cravings کیلئے ہینڈ‑ٹُو‑ماؤتھ متبادل بھی ملتا ہے۔</p>
+        <ul class="nr-list">
+          <li><strong>لوزینج:</strong> آہستہ گھلائیں، نہ چبائیں؛ 20–30 منٹ میں جذب۔</li>
+          <li><strong>اسپرے/انہیلر:</strong> تیز اثر؛ اچانک خواہش پر مفید۔</li>
+        </ul>
+      </article>
+    </div>
+
+    <h2 class="nr-section-title">دوائیں (نسخہ درکار)</h2>
+    <div class="nr-wrap">
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">💊</div><h3>بیوپروپیون (Bupropion)</h3></div>
+        <p>دماغ میں سگریٹ سے جڑی خواہش کم کرنے میں مدد دے سکتا ہے۔ عام طور پر چھوڑنے کی تاریخ سے 1–2 ہفتے پہلے شروع کیا جاتا ہے۔</p>
+        <ul class="nr-list">
+          <li><strong>ممکنہ ضمنی اثرات:</strong> بے خوابی، خشک منہ، بے چینی۔</li>
+          <li><strong>اہم احتیاط:</strong> مرگی/دوروں کی ہسٹری، خاص نفسیاتی امراض، یا مخصوص ادویات کے ساتھ — ڈاکٹر سے مشورہ ضروری۔</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🧠</div><h3>ویرینکلین (Varenicline)</h3></div>
+        <p>نکوٹین کے ریسیپٹرز پر اثر ڈال کر لطف کم اور ترکِ سگریٹ آسان کر سکتی ہے۔ عموماً بتدریج ڈوز بڑھا کر شروع کی جاتی ہے۔</p>
+        <ul class="nr-list">
+          <li><strong>ممکنہ ضمنی اثرات:</strong> متلی، خوابوں میں تبدیلی، سر درد۔</li>
+          <li><strong>اہم احتیاط:</strong> ذہنی صحت کے مسائل یا حمل/授乳 کی صورت میں ڈاکٹر کی ہدایات پر عمل کریں۔</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="nr-note">
+      <strong>نوٹ:</strong> یہ عمومی معلومات ہے، طبی مشورہ نہیں۔ اپنی صحت، ادویات یا حمل/授乳 کی صورتحال کے مطابق انتخاب کیلئے ہمیشہ ہیلتھ پروفیشنل سے مشورہ کریں۔
+    </div>
+  </section>
+
+  <!-- English content -->
+  <section class="app-section" id="contentEn" style="display:none">
+    <h2 class="nr-section-title">Nicotine Replacement Therapy (NRT)</h2>
+    <div class="nr-wrap">
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🧃</div><h3>Nicotine Gum</h3></div>
+        <p>Chew‑and‑park delivers nicotine slowly via the mouth to blunt cravings. Common doses: 2mg / 4mg.</p>
+        <ul class="nr-list">
+          <li><strong>How:</strong> Chew until tingly, park in cheek, repeat for ~30 minutes.</li>
+          <li><strong>Best for:</strong> Sudden, situational urges.</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🩹</div><h3>Nicotine Patch</h3></div>
+        <p>Steady nicotine across the day; apply in the morning, lasts 16–24h.</p>
+        <ul class="nr-list">
+          <li><strong>How:</strong> New patch daily on clean, dry skin; rotate sites.</li>
+          <li><strong>Best for:</strong> Reducing baseline cravings all day.</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🍬</div><h3>Lozenges / Mouth Spray / Inhaler</h3></div>
+        <p>Oral or buccal delivery for quicker relief; inhaler offers hand‑to‑mouth substitute.</p>
+        <ul class="nr-list">
+          <li><strong>Lozenge:</strong> Let it dissolve (don’t chew); ~20–30 minutes.</li>
+          <li><strong>Spray/Inhaler:</strong> Faster relief for sudden cravings.</li>
+        </ul>
+      </article>
+    </div>
+
+    <h2 class="nr-section-title">Prescription Medications</h2>
+    <div class="nr-wrap">
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">💊</div><h3>Bupropion</h3></div>
+        <p>May reduce desire to smoke; often started 1–2 weeks before quit date.</p>
+        <ul class="nr-list">
+          <li><strong>Possible side effects:</strong> Insomnia, dry mouth, anxiety.</li>
+          <li><strong>Important:</strong> Contraindicated with seizure disorders, certain psychiatric conditions/meds — consult your clinician.</li>
+        </ul>
+      </article>
+
+      <article class="nr-card">
+        <div class="nr-head"><div class="nr-emoji">🧠</div><h3>Varenicline</h3></div>
+        <p>Acts on nicotinic receptors to reduce reward; typically titrated up on start.</p>
+        <ul class="nr-list">
+          <li><strong>Possible side effects:</strong> Nausea, vivid dreams, headache.</li>
+          <li><strong>Important:</strong> Discuss mental health history and pregnancy/breastfeeding with your clinician.</li>
+        </ul>
+      </article>
+    </div>
+
+    <div class="nr-note">
+      <strong>Note:</strong> This is general information, not medical advice. Always confirm choices with a healthcare professional, especially if pregnant/breastfeeding or taking other medicines.
+    </div>
+  </section>
+
+  <!-- Back -->
+  <div style="text-align:center;margin:30px 0 60px">
+    <a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script>
+    // Text dictionary for helper + headings
+    const TXT = {
+      ur: {
+        title: 'نکوٹین ریپلیسمنٹ',
+        sub: 'NRT، بیوپروپیون، ویرینکلین — مختصر گائیڈ',
+        back: 'ایپ مینو',
+        helperTitle: 'میرے لئے کون سا آپشن بہتر ہو سکتا ہے؟',
+        q1a: 'میری خواہشیں اچانک اور تیز آتی ہیں',
+        q1b: 'پورا دن ہلکی لیکن مسلسل خواہش رہتی ہے',
+        q2a: 'مجھے ہاتھ سے کچھ پکڑنے/منہ مصروف رکھنے کی عادت ہے',
+        q2b: 'ایسی کوئی خاص عادت نہیں',
+        q3a: 'میں ڈاکٹر سے نسخہ لانے میں ٹھیک ہوں',
+        q3b: 'فی الحال نسخہ نہیں چاہتا/چاہتی',
+        seeSuggestion: 'مشورہ دیکھیں',
+        disclaimer: 'یہ عمومی معلومات ہے، طبی مشورہ نہیں — مناسب انتخاب کیلئے ہمیشہ ہیلتھ پروفیشنل سے مشورہ کریں۔',
+        rec_gum: '⚡️ اچانک خواہش پر: نکوٹین گم/لوزینج آزمائیں۔',
+        rec_patch: '🩹 پورے دن کی ہلکی خواہش پر: نکوٹین پیچ مناسب رہتا ہے۔',
+        rec_combo: '🔀 زیادہ فائدہ کیلئے: پیچ + گم/لوزینج (کمبو NRT) پر غور کریں۔',
+        rec_bup: '💊 اگر نسخہ لینے پر آمادہ ہیں: بیوپروپیون ڈاکٹر کے مشورے سے مفید ہو سکتا ہے۔',
+        rec_var: '🧠 شدید/ڈھیٹ cravings کیلئے: ویرینکلین ڈاکٹر کے مشورے سے مؤثر ہو سکتی ہے۔'
+      },
+      en: {
+        title: 'Nicotine Replacement',
+        sub: 'NRT, bupropion & varenicline — quick guide',
+        back: 'App Menu',
+        helperTitle: 'Which option might fit me?',
+        q1a: 'My urges are sudden/intense',
+        q1b: 'I have low but all‑day cravings',
+        q2a: 'I like having something in hand/mouth',
+        q2b: 'No strong hand‑to‑mouth habit',
+        q3a: 'I’m okay getting a prescription',
+        q3b: 'I prefer OTC for now',
+        seeSuggestion: 'See suggestion',
+        disclaimer: 'This is general info, not medical advice — confirm with a healthcare professional.',
+        rec_gum: '⚡ For sudden urges: try nicotine gum/lozenge.',
+        rec_patch: '🩹 For all‑day cravings: a nicotine patch can help.',
+        rec_combo: '🔀 Consider combo NRT: patch + gum/lozenge.',
+        rec_bup: '💊 If open to prescriptions: bupropion may help (clinician‑guided).',
+        rec_var: '🧠 For tougher cravings: varenicline may be effective (clinician‑guided).'
+      }
+    };
+
+    function applyLangNicotine(){
+      const ur = currentLang()==='ur';
+      const t = ur ? TXT.ur : TXT.en;
+
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('subtitle').textContent = t.sub;
+      document.getElementById('backApp').textContent = t.back;
+
+      // Helper text
+      document.getElementById('helperTitle').textContent = t.helperTitle;
+      document.getElementById('q1a').textContent = t.q1a;
+      document.getElementById('q1b').textContent = t.q1b;
+      document.getElementById('q2a').textContent = t.q2a;
+      document.getElementById('q2b').textContent = t.q2b;
+      document.getElementById('q3a').textContent = t.q3a;
+      document.getElementById('q3b').textContent = t.q3b;
+      document.getElementById('btnSuggest').textContent = t.seeSuggestion;
+      document.getElementById('helperDisclaimer').textContent = t.disclaimer;
+
+      // Show/hide blocks
+      document.getElementById('contentUr').style.display = ur ? 'block' : 'none';
+      document.getElementById('contentEn').style.display = ur ? 'none' : 'block';
+
+      applyDirLang(); // from common.js
+    }
+
+    // Simple logic for the helper
+    function makeSuggestion(){
+      const ur = currentLang()==='ur';
+      const t = ur ? TXT.ur : TXT.en;
+      const val = name => {
+        const el = document.querySelector(`input[name="${name}"]:checked`);
+        return el ? el.value : null;
+      };
+
+      const urge = val('urge');   // sudden | allDay
+      const hands = val('hands'); // yes | no
+      const presc = val('presc'); // ok | preferNRT
+
+      let lines = [];
+
+      if (urge === 'sudden') lines.push(t.rec_gum);
+      if (urge === 'allDay') lines.push(t.rec_patch);
+
+      if (hands === 'yes' && urge !== 'allDay') {
+        // lean toward gum/lozenge due to hand-to-mouth habit
+        if (!lines.includes(t.rec_gum)) lines.push(t.rec_gum);
+      }
+      if (urge === 'allDay' && hands === 'yes') {
+        // combo if both needs exist
+        lines.push(t.rec_combo);
+      }
+
+      if (presc === 'ok') {
+        lines.push(t.rec_bup);
+        lines.push(t.rec_var);
+      }
+
+      if (!lines.length) {
+        // fallbacks
+        lines = [t.rec_patch, t.rec_gum];
+      }
+
+      const box = document.getElementById('helperResult');
+      box.innerHTML = lines.map(l => `<div>• ${l}</div>`).join('');
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyLangNicotine();
+      hookLangButtons(applyLangNicotine); // from common.js
+
+      document.getElementById('btnSuggest').addEventListener('click', makeSuggestion);
+    });
+  </script>
+</body>
+</html>

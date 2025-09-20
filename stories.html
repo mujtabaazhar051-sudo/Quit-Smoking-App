@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Success Stories</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .carousel{position:relative;max-width:800px;margin:auto;overflow:hidden}
+    .carousel-inner{display:flex;transition:transform .5s ease}
+    .carousel-item{min-width:100%;background:#fff;padding:20px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:#ff4d4d;color:#fff;border:0;padding:6px 10px;cursor:pointer}
+    #prev{left:10px} #next{right:10px}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle"><button id="btn-ur" class="lang-btn">اردو</button><button id="btn-en" class="lang-btn">English</button></div>
+  <section class="hero small-hero"><div class="hero-content"><h1 id="title">کامیابی کی کہانیاں</h1><p id="subtitle">دوسروں سے حوصلہ لیں</p></div></section>
+
+  <section class="app-section">
+    <div class="carousel">
+      <div class="carousel-inner" id="inner"></div>
+      <button class="carousel-btn" id="prev">◀</button>
+      <button class="carousel-btn" id="next">▶</button>
+    </div>
+  </section>
+
+  <div style="text-align:center;margin:30px 0 60px"><a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    const STORIES = {
+      ur:[{n:"حسن، 29",t:"30 دن بعد سانس ہلکی، فٹبال دوبارہ شروع۔"},{n:"عائشہ، 32",t:"بچت سے آن لائن کورس — خود پر سرمایہ کاری!"},{n:"کامران، 40",t:"بچوں کے سامنے مثال — اب وہ فخر کرتے ہیں۔"}],
+      en:[{n:"Hasan, 29",t:"By day 30 I could breathe and play football again."},{n:"Ayesha, 32",t:"Savings funded an online course — investing in myself."},{n:"Kamran, 40",t:"Set a proud example for my kids."}]
+    };
+    let idx=0;
+    function render(){
+      const ur=currentLang()==='ur'; const list = STORIES[currentLang()] || STORIES.ur;
+      document.getElementById('title').textContent = ur?'کامیابی کی کہانیاں':'Success Stories';
+      document.getElementById('subtitle').textContent = ur?'دوسروں سے حوصلہ لیں':'Get inspired by others';
+      document.getElementById('backApp').textContent = ur?'ایپ مینو':'App Menu';
+      applyDirLang();
+      document.getElementById('inner').innerHTML = list.map(s=>`<div class="carousel-item"><h3>${s.n}</h3><p>${s.t}</p></div>`).join('');
+      idx=0; document.getElementById('inner').style.transform='translateX(0%)';
+    }
+    document.getElementById('prev').addEventListener('click',()=>move(-1));
+    document.getElementById('next').addEventListener('click',()=>move(1));
+    function move(d){ const inner=document.getElementById('inner'); const items=inner.children.length;
+      idx=(idx+d+items)%items; inner.style.transform=`translateX(-${idx*100}%)`; }
+    render(); hookLangButtons(render);
+  </script>
+</body>
+</html>

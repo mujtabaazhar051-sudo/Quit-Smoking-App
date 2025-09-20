@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Motivation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>#motivationQuote{transition:opacity .6s ease}.fade-out{opacity:0}</style>
+</head>
+<body>
+  <div class="lang-toggle">
+    <button id="btn-ur" class="lang-btn">اردو</button>
+    <button id="btn-en" class="lang-btn">English</button>
+  </div>
+
+  <section class="hero small-hero">
+    <div class="hero-content">
+      <h1 id="title">روزانہ موٹیویشن</h1>
+      <p id="subtitle">ایک نیا حوصلہ افزا اقتباس</p>
+    </div>
+  </section>
+
+  <section class="app-section">
+    <h2 id="quoteTitle">اقتباس</h2>
+    <p id="motivationQuote">ہر دن ایک نیا موقع ہے۔</p>
+    <button class="cta-btn" id="btnNewQuote">نیا اقتباس</button>
+  </section>
+
+  <div style="text-align:center;margin:30px 0 60px">
+    <a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a>
+      </div>
+
+  <script src="js/common.js"></script>
+  <script>
+    const QUOTES = {
+      ur: ["ہر دن ایک نیا موقع ہے۔","خواہش آتی ہے، مگر گزرجاتی بھی ہے۔","تم اپنی سوچ سے زیادہ مضبوط ہو۔","آج تم نے بہتر انتخاب کیا۔"],
+      en: ["Every day is a fresh start.","Cravings pass; pride stays.","You’re stronger than your urges.","Today you chose better."]
+    };
+    let qIndex = 0;
+    function setQuote(){
+      const el = document.getElementById('motivationQuote');
+      const arr = QUOTES[currentLang()] || QUOTES.ur;
+      el.classList.add('fade-out');
+      setTimeout(()=>{ el.textContent = arr[qIndex % arr.length]; el.classList.remove('fade-out'); }, 250);
+    }
+    function applyCopy(){
+      const ur = currentLang()==='ur';
+      document.getElementById('title').textContent    = ur ? 'روزانہ موٹیویشن' : 'Daily Motivation';
+      document.getElementById('subtitle').textContent = ur ? 'ایک نیا حوصلہ افزا اقتباس' : 'A fresh motivational quote';
+      document.getElementById('quoteTitle').textContent = ur ? 'اقتباس' : 'Quote';
+      document.getElementById('btnNewQuote').textContent = ur ? 'نیا اقتباس' : 'New Quote';
+      document.getElementById('backApp').textContent = ur ? 'ایپ مینو' : 'App Menu';
+      applyDirLang();
+      setQuote();
+    }
+    applyCopy();
+    hookLangButtons(applyCopy);
+    document.getElementById('btnNewQuote').addEventListener('click',()=>{ qIndex++; setQuote(); });
+  </script>
+</body>
+</html>

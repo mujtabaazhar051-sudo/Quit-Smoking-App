@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سگریٹ نوشی کو خیرباد کہیں</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- LTR overrides for English mode -->
+  <style>
+    .ltr-mode .about-section,
+    .ltr-mode .about-card,
+    .ltr-mode .about-card ul,
+    .ltr-mode .about-card p,
+    .ltr-mode .info-section,
+    .ltr-mode .info-points,
+    .ltr-mode .info-points li {
+      direction: ltr;
+      text-align: left;
+    }
+    /* smoother quote fade */
+    #quoteSlider { transition: opacity .6s ease; }
+    #quoteSlider.fade-out { opacity: 0; }
+  </style>
+</head>
+<body>
+  
+
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="btn-ur" class="lang-btn active">اردو</button>
+    <button id="btn-en" class="lang-btn">English</button>
+    <a href="about.html" class="about-btn" id="aboutBtn">About Me</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>سگریٹ کو چھوڑیں، زندگی اپنائیں</h1>
+      <p>اب وقت ہے ایک صحت مند، سگریٹ سے پاک زندگی کا آغاز کرنے کا</p>
+      <p id="quoteSlider">ہر دن ایک نیا موقع ہے۔</p>
+    </div>
+  </section>
+
+  <!-- FIXED CTA BUTTON -->
+  <div class="fixed-cta">
+    <a href="app.html" class="cta-btn">ابھی شروع کریں</a>
+  </div>
+
+  <!-- STATS -->
+  <section class="stats-section animate-on-scroll">
+    <h2>حقائق جو ہوش اُڑادیں</h2>
+    <div class="stats-grid">
+      <div>
+        <div class="stat" id="stat1">0</div>
+        <div class="stat-label">سالانہ اموات</div>
+      </div>
+      <div>
+        <div class="stat" id="stat2">0</div>
+        <div class="stat-label">ہر دن نئی شروعات</div>
+      </div>
+      <div>
+        <div class="stat" id="stat3">0</div>
+        <div class="stat-label">پاکستان میں سگریٹ پینے والے</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MILESTONES -->
+  <section class="milestone-section animate-on-scroll">
+    <h2>صحت کی کامیابیاں</h2>
+    <div class="milestone-cards">
+      <div class="card">
+        <h3>🫁 3 دن</h3>
+        <p>آکسیجن کی سطح بہتر، سانس ہموار</p>
+      </div>
+      <div class="card">
+        <h3>❤️ 1 مہینہ</h3>
+        <p>دل کی بیماری کا خطرہ نمایاں حد تک کم</p>
+      </div>
+      <div class="card">
+        <h3>🎉 1 سال</h3>
+        <p>کینسر اور دل کی بیماری کا خطرہ 50٪ کم</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CIGARETTES ARE BAD -->
+  <section class="info-section animate-on-scroll">
+    <h2>سگریٹ نوشی کے نقصانات</h2>
+    <ul class="info-points">
+      <li>ہر سال لاکھوں افراد تمباکو سے جُڑی بیماریوں سے ہلاک ہوتے ہیں</li>
+      <li>پھیپھڑوں، دل اور منہ کے کینسر کا خطرہ کئی گنا بڑھ جاتا ہے</li>
+      <li>جلد، دانت اور سانس بدبو دار ہو جاتے ہیں</li>
+      <li>ذہنی دباؤ، نیند کی خرابی، اور کمزوری کا باعث بنتی ہے</li>
+    </ul>
+  </section>
+
+  <!-- ABOUT / HOW TO USE / ADVANTAGES -->
+  <section class="about-section animate-on-scroll">
+    <h2>یہ ویب سائٹ کیا ہے؟ کیسے استعمال کریں؟ اور اس کے فائدے</h2>
+
+    <div class="about-grid">
+      <article class="about-card">
+        <h3>یہ کیا ہے؟</h3>
+        <p>
+          یہ ایک سادہ مگر مؤثر پلیٹ فارم ہے جو آپ کو سگریٹ چھوڑنے کے سفر میں
+          روزانہ موٹیویشن، پیش رفت کی جھلک اور عملی رہنمائی دیتا ہے۔
+        </p>
+      </article>
+
+      <article class="about-card">
+        <h3>استعمال کیسے کریں</h3>
+        <ul class="how-to-list">
+          <li><span class="step-badge">1</span> صفحہ آخر میں <strong>“ابھی شروع کریں”</strong> پر کلک کریں</li>
+          <li><span class="step-badge">2</span> ایپ میں اپنی چھوڑنے کی تاریخ منتخب کریں</li>
+          <li><span class="step-badge">3</span> روزانہ عادت ٹریکر اور مشورے فالو کریں</li>
+          <li><span class="step-badge">4</span> واٹس ایپ پر اپنی کامیابی شیئر کریں</li>
+        </ul>
+      </article>
+
+      <article class="about-card">
+        <h3>فائدے</h3>
+        <ul>
+          <li>📈 واضح پیش رفت اور مائلسٹونز</li>
+          <li>💬 مسلسل حوصلہ افزائی اور یاددہانی</li>
+          <li>💰 خرچ میں نمایاں کمی اور بچت</li>
+          <li>🫁 صحت، نیند اور توانائی میں بہتری</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- FAQs -->
+  <section class="faq-section animate-on-scroll">
+    <h2>عمومی سوالات</h2>
+    <details>
+      <summary>سگریٹ چھوڑنے کا سب سے اچھا طریقہ کیا ہے؟</summary>
+      <p>مرحلہ وار کم کریں، مدد لیں اور صحت مند عادات اپنائیں۔</p>
+    </details>
+    <details>
+      <summary>کیا نکوٹین گم مددگار ہے؟</summary>
+      <p>جی ہاں، نکوٹین گم جسم کو سگریٹ کے بغیر ایڈجسٹ کرنے میں مدد دیتی ہے۔</p>
+    </details>
+    <details>
+      <summary>کتنے دن میں craving ختم ہو جاتی ہے؟</summary>
+      <p>زیادہ تر لوگ 2-4 ہفتوں میں بہتر محسوس کرتے ہیں۔</p>
+    </details>
+  </section>
+
+  <script>
+    function animateCounter(id, target, speed = 30) {
+      let count = 0;
+      const el = document.getElementById(id);
+      const increment = target / speed;
+      const interval = setInterval(() => {
+        count += increment;
+        if (count >= target) {
+          el.innerText = target.toLocaleString('ur-PK');
+          clearInterval(interval);
+        } else {
+          el.innerText = Math.floor(count).toLocaleString('ur-PK');
+        }
+      }, 50);
+    }
+
+    // Scroll Animation + fallbacks
+    const elements = document.querySelectorAll('.animate-on-scroll');
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+      }, { threshold: 0.2 });
+      elements.forEach(el => observer.observe(el));
+    } else {
+      elements.forEach(el => el.classList.add('visible'));
+    }
+    document.addEventListener('DOMContentLoaded', () => elements.forEach(el => el.classList.add('visible')));
+
+    window.onload = () => {
+      animateCounter("stat1", 160000);
+      animateCounter("stat2", 3000);
+      animateCounter("stat3", 24000000);
+    };
+
+    // I18N with quotes
+    const i18n = {
+      ur: {
+        dir: 'rtl', lang: 'ur',
+        heroH1: "سگریٹ کو چھوڑیں، زندگی اپنائیں",
+        heroP: "اب وقت ہے ایک صحت مند، سگریٹ سے پاک زندگی کا آغاز کرنے کا",
+        statsTitle: "حقائق جو ہوش اُڑادیں",
+        statLabels: ["سالانہ اموات", "ہر دن نئی شروعات", "پاکستان میں سگریٹ پینے والے"],
+        milestonesTitle: "صحت کی کامیابیاں",
+        milestoneHeads: ["🫁 3 دن", "❤️ 1 مہینہ", "🎉 1 سال"],
+        milestoneTexts: ["آکسیجن کی سطح بہتر، سانس ہموار", "دل کی بیماری کا خطرہ نمایاں حد تک کم", "کینسر اور دل کی بیماری کا خطرہ 50٪ کم"],
+        infoTitle: "سگریٹ نوشی کے نقصانات",
+        infoPoints: [
+          "ہر سال لاکھوں افراد تمباکو سے جُڑی بیماریوں سے ہلاک ہوتے ہیں",
+          "پھیپھڑوں، دل اور منہ کے کینسر کا خطرہ کئی گنا بڑھ جاتا ہے",
+          "جلد، دانت اور سانس بدبو دار ہو جاتے ہیں",
+          "ذہنی دباؤ، نیند کی خرابی، اور کمزوری کا باعث بنتی ہے"
+        ],
+        aboutTitle: "یہ ویب سائٹ کیا ہے؟ کیسے استعمال کریں؟ اور اس کے فائدے",
+        aboutWhatH3: "یہ کیا ہے؟",
+        aboutWhatP: "یہ ایک سادہ مگر مؤثر پلیٹ فارم ہے جو آپ کو سگریٹ چھوڑنے کے سفر میں روزانہ موٹیویشن، پیش رفت کی جھلک اور عملی رہنمائی دیتا ہے۔",
+        aboutHowH3: "استعمال کیسے کریں",
+        aboutHowSteps: [
+          "صفحہ آخر میں “ابھی شروع کریں” پر کلک کریں",
+          "ایپ میں اپنی چھوڑنے کی تاریخ منتخب کریں",
+          "روزانہ عادت ٹریکر اور مشورے فالو کریں",
+          "واٹس ایپ پر اپنی کامیابی شیئر کریں"
+        ],
+        aboutBenefitsH3: "فائدے",
+        faqTitle: "عمومی سوالات",
+        faqs: [
+          { q: "سگریٹ چھوڑنے کا سب سے اچھا طریقہ کیا ہے؟", a: "مرحلہ وار کم کریں، مدد لیں اور صحت مند عادات اپنائیں۔" },
+          { q: "کیا نکوٹین گم مددگار ہے؟", a: "جی ہاں، نکوٹین گم جسم کو سگریٹ کے بغیر ایڈجسٹ کرنے میں مدد دیتی ہے۔" },
+          { q: "کتنے دن میں craving ختم ہو جاتی ہے؟", a: "زیادہ تر لوگ 2-4 ہفتوں میں بہتر محسوس کرتے ہیں۔" }
+        ],
+        cta: "ابھی شروع کریں",
+        quotes: [
+          "ہر دن ایک نیا موقع ہے۔",
+          "تم اس سے زیادہ مضبوط ہو جتنا تم سوچتے ہو۔",
+          "آج تم نے اپنے آپ کو بہتر بنانے کا انتخاب کیا ہے۔"
+        ]
+      },
+      en: {
+        dir: 'ltr', lang: 'en',
+        heroH1: "Quit Smoking, Embrace Life",
+        heroP: "This is your moment to start a healthy, smoke-free life.",
+        statsTitle: "Hard-Hitting Facts",
+        statLabels: ["Annual deaths", "New starts each day", "Smokers in Pakistan"],
+        milestonesTitle: "Health Milestones",
+        milestoneHeads: ["🫁 Day 3", "❤️ 1 Month", "🎉 1 Year"],
+        milestoneTexts: ["Better oxygen levels and easier breathing", "Significantly reduced heart disease risk", "Cancer & heart disease risk down by ~50%"],
+        infoTitle: "Why Smoking Is Harmful",
+        infoPoints: [
+          "Millions die each year from tobacco-related diseases",
+          "Greatly increases risk of lung, heart and oral cancers",
+          "Damages skin, teeth and causes bad breath",
+          "Linked to stress, poor sleep and low energy"
+        ],
+        aboutTitle: "What is this site? How to use it? And the benefits",
+        aboutWhatH3: "What it is",
+        aboutWhatP: "A simple, effective platform to support your quit journey with daily motivation, progress snapshots and practical guidance.",
+        aboutHowH3: "How to use",
+        aboutHowSteps: [
+          "Click “Get Started” at the bottom",
+          "Pick your quit date in the app",
+          "Use the habit tracker and follow tips daily",
+          "Share your wins on WhatsApp"
+        ],
+        aboutBenefitsH3: "Benefits",
+        faqTitle: "FAQs",
+        faqs: [
+          { q: "What’s the best way to quit?", a: "Cut down gradually or quit in one go—whichever you can stick with." },
+          { q: "Is nicotine gum helpful?", a: "Yes, it can help your body adjust without cigarettes." },
+          { q: "How long do cravings last?", a: "Most urges peak and fade within 5–10 minutes." }
+        ],
+        cta: "Get Started",
+        quotes: [
+          "Every day is a fresh start.",
+          "You’re stronger than your cravings.",
+          "Today you chose a better you."
+        ]
+      }
+    };
+
+    // Quote rotator (language-aware + smooth fade)
+    let currentLang = 'ur';
+    let quoteTimer = null;
+    let quoteIndex = 0;
+
+    function showNextQuote() {
+      const el = document.getElementById('quoteSlider');
+      if (!el) return;
+      const arr = (i18n[currentLang] && i18n[currentLang].quotes) ? i18n[currentLang].quotes : [];
+      if (!arr.length) return;
+
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        el.textContent = arr[quoteIndex];
+        quoteIndex = (quoteIndex + 1) % arr.length;
+        el.classList.remove('fade-out');
+      }, 300);
+    }
+
+    function startQuoteRotation() {
+      showNextQuote(); // immediate
+      quoteTimer = setInterval(showNextQuote, 5000);
+    }
+
+    function stopQuoteRotation() {
+      if (quoteTimer) clearInterval(quoteTimer);
+      quoteTimer = null;
+    }
+
+    // Helper to rebuild "How to use" list so languages don't mix
+    function rebuildHowToList(steps) {
+      const aboutCards = document.querySelectorAll('.about-grid .about-card');
+      const listEl = aboutCards[1]?.querySelector('.how-to-list');
+      if (!listEl) return;
+      listEl.innerHTML = '';
+      steps.forEach((step, idx) => {
+        const li = document.createElement('li');
+        const badge = document.createElement('span');
+        badge.className = 'step-badge';
+        badge.textContent = (idx + 1);
+        li.appendChild(badge);
+        li.appendChild(document.createTextNode(' ' + step));
+        listEl.appendChild(li);
+      });
+    }
+
+    function setLanguage(langKey) {
+      const t = i18n[langKey] || i18n.ur;
+      currentLang = langKey;
+
+      // dir/lang + LTR overrides
+      document.documentElement.setAttribute('dir', t.dir);
+      document.documentElement.setAttribute('lang', t.lang);
+      document.body.classList.toggle('ltr-mode', langKey === 'en');
+
+      // Hero
+      const heroH1 = document.querySelector('.hero-content h1');
+      const heroP = document.querySelector('.hero-content p');
+      if (heroH1) heroH1.textContent = t.heroH1;
+      if (heroP) heroP.textContent = t.heroP;
+
+      // CTA
+      const cta = document.querySelector('.fixed-cta .cta-btn');
+      if (cta) cta.textContent = t.cta;
+
+      // Stats
+      const statsTitleEl = document.querySelector('.stats-section h2');
+      if (statsTitleEl) statsTitleEl.textContent = t.statsTitle;
+      const statLabels = document.querySelectorAll('.stats-grid .stat-label');
+      statLabels.forEach((el, idx) => { el.textContent = t.statLabels[idx] || el.textContent; });
+
+      // Milestones
+      const msTitle = document.querySelector('.milestone-section h2');
+      if (msTitle) msTitle.textContent = t.milestonesTitle;
+      const msHeads = document.querySelectorAll('.milestone-cards .card h3');
+      const msTexts = document.querySelectorAll('.milestone-cards .card p');
+      msHeads.forEach((el, idx) => { el.textContent = t.milestoneHeads[idx] || el.textContent; });
+      msTexts.forEach((el, idx) => { el.textContent = t.milestoneTexts[idx] || el.textContent; });
+
+      // Info
+      const infoTitle = document.querySelector('.info-section h2');
+      if (infoTitle) infoTitle.textContent = t.infoTitle;
+      const infoLis = document.querySelectorAll('.info-section .info-points li');
+      infoLis.forEach((el, idx) => { el.textContent = t.infoPoints[idx] || el.textContent; });
+
+      // About - What
+      const aboutCards = document.querySelectorAll('.about-grid .about-card');
+      if (aboutCards[0]) {
+        const h3 = aboutCards[0].querySelector('h3');
+        const p = aboutCards[0].querySelector('p');
+        if (h3) h3.textContent = t.aboutWhatH3;
+        if (p) p.textContent = t.aboutWhatP;
+      }
+
+      // About - How to (rebuild list so languages don't mix)
+      if (aboutCards[1]) {
+        const h3 = aboutCards[1].querySelector('h3');
+        if (h3) h3.textContent = t.aboutHowH3;
+        rebuildHowToList(t.aboutHowSteps);
+      }
+
+      // About - Benefits
+      if (aboutCards[2]) {
+        const h3 = aboutCards[2].querySelector('h3');
+        if (h3) h3.textContent = t.aboutBenefitsH3;
+      }
+
+      // FAQs
+      const faqTitle = document.querySelector('.faq-section h2');
+      if (faqTitle) faqTitle.textContent = t.faqTitle;
+      const faqDetails = document.querySelectorAll('.faq-section details');
+      faqDetails.forEach((det, idx) => {
+        const summary = det.querySelector('summary');
+        const p = det.querySelector('p');
+        if (t.faqs[idx]) {
+          if (summary) summary.textContent = t.faqs[idx].q;
+          if (p) p.textContent = t.faqs[idx].a;
+        }
+      });
+
+      // Toggle button state
+      document.getElementById('btn-ur')?.classList.toggle('active', langKey === 'ur');
+      document.getElementById('btn-en')?.classList.toggle('active', langKey === 'en');
+
+      // Restart quotes in this language
+      quoteIndex = 0;
+      stopQuoteRotation();
+      startQuoteRotation();
+    }
+
+    // Hook up toggle buttons
+    document.getElementById('btn-ur')?.addEventListener('click', () => setLanguage('ur'));
+    document.getElementById('btn-en')?.addEventListener('click', () => setLanguage('en'));
+
+    // Initialize default language AFTER DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      setLanguage('ur'); // default to Urdu on first load
+    });
+  </script>
+
+</body>
+</html>

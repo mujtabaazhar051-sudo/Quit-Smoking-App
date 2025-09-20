@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expert Tips</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;max-width:900px;margin:0 auto}
+    .tip-card{background:#fff;padding:14px;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle"><button id="btn-ur" class="lang-btn">اردو</button><button id="btn-en" class="lang-btn">English</button></div>
+  <section class="hero small-hero"><div class="hero-content"><h1 id="title">ماہر مشورے</h1><p id="subtitle">عملی رہنمائی</p></div></section>
+  <section class="app-section"><div class="tips-grid" id="grid"></div></section>
+  <div style="text-align:center;margin:30px 0 60px"><a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    const TIPS = {
+      ur:["زیادہ پانی پئیں — craving کم ہوگی","ٹرگرز کی فہرست بنائیں","5 منٹ چہل قدمی کریں","گم یا کچو کھائیں","دوست/گروپ سے سپورٹ لیں","اچھی نیند ارادے کو مضبوط رکھتی ہے"],
+      en:["Drink more water","List your triggers","Take a 5‑minute walk","Chew gum or seeds","Lean on friends/groups","Sleep well to keep willpower high"]
+    };
+    function render(){
+      const ur=currentLang()==='ur';
+      document.getElementById('title').textContent=ur?'ماہر مشورے':'Expert Tips';
+      document.getElementById('subtitle').textContent=ur?'عملی رہنمائی':'Practical guidance';
+      document.getElementById('backApp').textContent=ur?'ایپ مینو':'App Menu';
+      applyDirLang();
+      const list=TIPS[currentLang()] || TIPS.ur;
+      document.getElementById('grid').innerHTML = list.map(t=>`<div class="tip-card">${t}</div>`).join('');
+    }
+    render(); hookLangButtons(render);
+  </script>
+</body>
+</html>

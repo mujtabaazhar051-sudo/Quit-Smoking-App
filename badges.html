@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Badges</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .badges-wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;max-width:900px;margin:0 auto}
+    .badge-card{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);display:flex;gap:10px;align-items:center;opacity:.85;border:1px solid #eee}
+    .badge-card.earned{border:2px solid #ff4d4d;opacity:1}
+    .badge-emoji{font-size:1.6rem}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle"><button id="btn-ur" class="lang-btn">اردو</button><button id="btn-en" class="lang-btn">English</button></div>
+  <section class="hero small-hero"><div class="hero-content"><h1 id="title">کامیابی کے بیجز</h1><p id="subtitle">چھوڑنے کے دنوں کے مطابق بیجز اَن لاک ہوتے ہیں</p></div></section>
+  <section class="app-section"><div class="badges-wrap" id="badgesWrap"></div></section>
+  <div style="text-align:center;margin:30px 0 60px"><a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a></div>
+  <script src="js/common.js"></script>
+  <script>
+    const BADGES = [
+      { id:'d1', emoji:'🏅', ur:'پہلا دن مکمل', en:'First Day', min:1 },
+      { id:'d3', emoji:'🎯', ur:'تین دن', en:'3 Days', min:3 },
+      { id:'w1', emoji:'🏆', ur:'ایک ہفتہ', en:'1 Week', min:7 },
+      { id:'m1', emoji:'🌟', ur:'ایک مہینہ', en:'1 Month', min:30 },
+      { id:'m3', emoji:'💎', ur:'تین مہینے', en:'3 Months', min:90 },
+      { id:'y1', emoji:'👑', ur:'ایک سال', en:'1 Year', min:365 }
+    ];
+    function applyCopy(){ const ur=currentLang()==='ur';
+      document.getElementById('title').textContent=ur?'کامیابی کے بیجز':'Achievement Badges';
+      document.getElementById('subtitle').textContent=ur?'چھوڑنے کے دنوں کے مطابق بیجز اَن لاک ہوتے ہیں':'Badges unlock by days since quit';
+      document.getElementById('backApp').textContent=ur?'ایپ مینو':'App Menu';
+      applyDirLang(); render();
+    }
+    function render(){
+      const ur=currentLang()==='ur'; const wrap=document.getElementById('badgesWrap');
+      const q = LS.get('quitDate',''); let days=0; if(q) days = daysBetween(new Date(q+'T00:00:00'), new Date());
+      wrap.innerHTML = BADGES.map(b=>{
+        const earned = days>=b.min;
+        return `<div class="badge-card ${earned?'earned':''}"><div class="badge-emoji">${b.emoji}</div><div><div style="font-weight:700">${ur?b.ur:b.en}</div><div style="font-size:.95rem">${earned?(ur?'اَن لاک ہوگیا':'Unlocked'):(ur?'ابھی باقی':'Locked')}</div></div></div>`;
+      }).join('');
+    }
+    applyCopy(); hookLangButtons(applyCopy);
+  </script>
+</body>
+</html>

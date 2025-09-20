@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>میری ترکِ سگریٹ ایپ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    :root{
+      --brand:#ff4d4d;
+      --ink:#111;
+      --muted:#4b5563;
+      --card:#fff;
+      --bd:rgba(0,0,0,.06);
+      --shadow-sm:0 3px 12px rgba(0,0,0,.08);
+      --shadow-md:0 12px 28px rgba(0,0,0,.14);
+    }
+
+    .hero.small-hero{ height: 32vh; }
+    .app-section{ padding: 32px 16px; }
+
+    /* Bigger grid & cards */
+    .cards-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+      gap:28px;
+      max-width:1200px;
+      margin:0 auto 50px;
+    }
+    .feature-card{
+      background: var(--card);
+      border: 1px solid var(--bd);
+      border-radius: 20px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      min-height: 150px;
+      color: var(--ink);
+      text-decoration: none;
+      transition: transform .14s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .feature-card:hover{
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(255,77,77,.25);
+    }
+
+    /* Icon bubble larger */
+    .feature-card .icon{
+      flex: 0 0 90px;
+      height: 90px;
+      border-radius: 20px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 2.8rem;
+      background: radial-gradient(70% 70% at 35% 30%, rgba(255,77,77,.18), rgba(255,77,77,.08));
+      box-shadow: inset 0 0 0 1px rgba(255,77,77,.18);
+    }
+
+    /* Text bigger */
+    .feature-card h3{
+      margin: 0 0 10px;
+      font-size:1.5rem;
+      line-height:1.4;
+    }
+    .feature-card p{
+      margin: 0;
+      color: var(--muted);
+      font-size:1.1rem;
+      line-height:1.7;
+    }
+
+    /* RTL/LTR fix */
+    .ltr-mode .cards-grid,
+    .ltr-mode .feature-card { direction:ltr; text-align:left; }
+
+    /* Entrance animation */
+    .cards-grid .feature-card{
+      opacity:0;
+      transform:translateY(16px);
+      animation:cardIn .5s ease forwards;
+    }
+    .cards-grid .feature-card:nth-child(n){ animation-delay: calc(.05s * var(--i)); }
+    @keyframes cardIn { to{ opacity:1; transform:translateY(0) } }
+
+    @media (max-width:480px){
+      .cards-grid{ grid-template-columns:1fr; gap:20px; }
+      .feature-card{ min-height: 120px; padding: 20px; }
+      .feature-card .icon{ flex:0 0 70px; height:70px; font-size:2.2rem; }
+      .feature-card h3{ font-size:1.3rem; }
+      .feature-card p{ font-size:1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Language Toggle -->
+  <div class="lang-toggle">
+    <button id="btn-ur" class="lang-btn active">اردو</button>
+    <button id="btn-en" class="lang-btn">English</button>
+  </div>
+
+  <!-- Header -->
+  <section class="hero small-hero">
+    <div class="hero-content">
+      <h1 id="homeTitle">فیچر مینو</h1>
+      <p id="homeSubtitle">اپنا فیچر منتخب کریں</p>
+    </div>
+  </section>
+
+  <!-- Feature Cards -->
+  <section class="app-section">
+    <div class="cards-grid" id="cardsGrid"></div>
+  </section>
+
+  <!-- Back to Landing -->
+  <div style="text-align:center;margin:30px 0 60px">
+    <a href="index.html" class="cta-btn" id="backHome">ہوم پیج</a>
+  </div>
+
+  <script src="js/common.js"></script>
+<script>
+  const cards = [
+    { href:'motivation.html', icon:'💬', ur:{t:'روزانہ موٹیویشن', d:'دن کا حوصلہ افزا پیغام'}, en:{t:'Daily Motivation', d:'A fresh quote for the day'} },
+    { href:'tracker.html',    icon:'📅', ur:{t:'عادت ٹریکر', d:'روزانہ پیش رفت اور سٹرییک'}, en:{t:'Habit Tracker', d:'Daily progress & streak'} },
+    { href:'badges.html',     icon:'🏅', ur:{t:'بیجز', d:'کامیابیوں کے بیجز دیکھیں'}, en:{t:'Badges', d:'See unlocked achievements'} },
+    { href:'distraction.html',icon:'⏱️', ur:{t:'5 منٹ ڈسٹرکشن', d:'فوراً دھیان ہٹائیں'}, en:{t:'5-Minute Distraction', d:'Quick coping activities'} },
+    { href:'breathing.html',  icon:'🫁', ur:{t:'سانس کی مشق', d:'30 سیکنڈ پرسکون سانسیں'}, en:{t:'Breathing', d:'30-second calm breathing'} },
+    { href:'calendar.html',   icon:'🗓️', ur:{t:'کیلنڈر', d:'اسموک فری دن مارک کریں'}, en:{t:'Calendar', d:'Mark smoke-free days'} },
+    { href:'savings.html',    icon:'💰', ur:{t:'بچت کیلکولیٹر', d:'رقم اور سگریٹ کی بچت'}, en:{t:'Savings Calculator', d:'Money & cigarettes saved'} },
+    { href:'stories.html',    icon:'🎉', ur:{t:'کامیابی کی کہانیاں', d:'دیگر لوگوں سے حوصلہ'}, en:{t:'Success Stories', d:'Get inspired by others'} },
+    { href:'tips.html',       icon:'📚', ur:{t:'ماہر مشورے', d:'عملی رہنمائی'}, en:{t:'Expert Tips', d:'Practical guidance'} },
+    { href:'nicotine.html',   icon:'💊', ur:{t:'نکوٹین ریپلیسمنٹ', d:'گمز، پیچز، بیوپروپیون، ویرینکلین وغیرہ'}, en:{t:'Nicotine Replacement', d:'Gums, patches, bupropion, varenicline & more'} }
+  ];
+
+
+    function renderCards(){
+      const grid = document.getElementById('cardsGrid');
+      const urdu = currentLang() === 'ur';
+      grid.innerHTML = cards.map((c, i) => `
+        <a class="feature-card" href="${c.href}" style="--i:${i+1}" aria-label="${urdu ? c.ur.t : c.en.t}">
+          <div class="icon">${c.icon}</div>
+          <div>
+            <h3>${urdu ? c.ur.t : c.en.t}</h3>
+            <p>${urdu ? c.ur.d : c.en.d}</p>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function applyLangHome(){
+      const ur = currentLang()==='ur';
+      document.getElementById('homeTitle').textContent    = ur ? 'فیچر مینو' : 'Feature Menu';
+      document.getElementById('homeSubtitle').textContent = ur ? 'اپنا فیچر منتخب کریں' : 'Pick a feature to open';
+      document.getElementById('backHome').textContent     = ur ? 'ہوم پیج' : 'Back to Home';
+      applyDirLang();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyLangHome();
+      renderCards();
+      hookLangButtons(() => { applyLangHome(); renderCards(); });
+    });
+  </script>
+</body>
+</html>

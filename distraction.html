@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>5‑Minute Distraction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="lang-toggle"><button id="btn-ur" class="lang-btn">اردو</button><button id="btn-en" class="lang-btn">English</button></div>
+  <section class="hero small-hero"><div class="hero-content"><h1 id="title">5 منٹ ڈسٹرکشن</h1><p id="subtitle">ایک سرگرمی منتخب کریں اور 5 منٹ کریں</p></div></section>
+  <section class="app-section">
+    <p id="tip">ایک سادہ سرگرمی منتخب کریں</p>
+    <div class="timer" id="timer">05:00</div>
+    <button class="cta-btn" id="start">شروع کریں</button>
+    <div id="ideas" style="max-width:700px;margin:12px auto;font-size:1rem"></div>
+  </section>
+  <div style="text-align:center;margin:30px 0 60px"><a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a></div>
+  <script src="js/common.js"></script>
+  <script>
+    const IDEAS = {
+      ur:["5 منٹ تیز چلیں","چائے/پانی پئیں","10 پُش اپس","دوست کو میسج","10 گہری سانسیں"],
+      en:["Walk briskly","Drink water/tea","Do 10 push‑ups","Text a friend","Ten deep breaths"]
+    };
+    let int=null;
+    function start(){ stop(); let s=300; tick();
+      int=setInterval(()=>{ s--; tick(); if(s<=0) stop(); },1000);
+      function tick(){ const m=String(Math.floor(s/60)).padStart(2,'0'); const ss=String(s%60).padStart(2,'0'); document.getElementById('timer').textContent=`${m}:${ss}`; }
+    }
+    function stop(){ if(int){ clearInterval(int); int=null; } }
+    function applyCopy(){
+      const ur=currentLang()==='ur';
+      document.getElementById('title').textContent=ur?'5 منٹ ڈسٹرکشن':'5‑Minute Distraction';
+      document.getElementById('subtitle').textContent=ur?'ایک سرگرمی منتخب کریں اور 5 منٹ کریں':'Pick an activity and do it for 5 minutes';
+      document.getElementById('tip').textContent=ur?'ایک سادہ سرگرمی منتخب کریں':'Choose a simple activity';
+      document.getElementById('start').textContent=ur?'شروع کریں':'Start';
+      document.getElementById('backApp').textContent=ur?'ایپ مینو':'App Menu';
+      const arr = IDEAS[currentLang()] || IDEAS.ur;
+      document.getElementById('ideas').textContent = '• ' + arr.sort(()=>.5-Math.random()).slice(0,3).join(' • ');
+      applyDirLang();
+    }
+    document.getElementById('start').addEventListener('click', start);
+    applyCopy(); hookLangButtons(applyCopy);
+  </script>
+</body>
+</html>

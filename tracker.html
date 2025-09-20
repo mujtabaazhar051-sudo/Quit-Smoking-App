@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Habit Tracker</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .progress-item{max-width:640px;margin:10px auto;text-align:right}
+    .progress-bar{background:#ddd;height:15px;border-radius:10px;overflow:hidden}
+    .progress{height:100%;background:#ff4d4d;width:0;transition:width 1s ease}
+    .ltr-mode .progress-item{text-align:left}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle">
+    <button id="btn-ur" class="lang-btn">اردو</button>
+    <button id="btn-en" class="lang-btn">English</button>
+  </div>
+
+  <section class="hero small-hero">
+    <div class="hero-content">
+      <h1 id="title">عادت اور پیش رفت ٹریکر</h1>
+      <p id="subtitle">چھوڑنے کی تاریخ منتخب کریں اور روزانہ چیک‑ان کریں</p>
+    </div>
+  </section>
+
+  <section class="app-section" style="max-width:680px;margin:auto;text-align:right">
+    <label for="quitDate"><strong id="quitLabel">چھوڑنے کی تاریخ:</strong></label>
+    <input type="date" id="quitDate" style="padding:8px;border-radius:6px;border:1px solid #ddd;margin:8px 0;width:100%">
+
+    <div style="margin:12px 0;">
+      <label style="display:flex;align-items:center;gap:8px;justify-content:flex-end">
+        <input type="checkbox" id="noSmokeToday">
+        <span id="noSmokeLabel">آج میں نے سگریٹ نہیں پی</span>
+      </label>
+      <button class="cta-btn" id="btnSaveDay" style="margin-top:8px;">محفوظ کریں</button>
+    </div>
+
+    <div class="progress-item">
+      <div style="display:flex;justify-content:space-between;font-weight:700">
+        <span id="streakLabel">مسلسل دن:</span><span id="streakValue">0</span>
+      </div>
+      <div class="progress-bar"><div class="progress" id="streakProgress" style="width:0%"></div></div>
+      <small id="streakHint">اگلا ہدف: 7 دن</small>
+    </div>
+
+    <div class="progress-item">
+      <div style="display:flex;justify-content:space-between;font-weight:700">
+        <span id="daysLabel">چھوڑے گئے دن:</span><span id="daysSince">0</span>
+      </div>
+      <div class="progress-bar"><div class="progress" id="daysProgress" style="width:0%"></div></div>
+      <small id="daysHint">اگلا ہدف: 30 دن</small>
+    </div>
+  </section>
+
+  <div style="text-align:center;margin:30px 0 60px">
+    <a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a>
+  </div>
+
+  <script src="js/common.js"></script>
+  <script>
+    function applyCopy(){
+      const ur = currentLang()==='ur';
+      document.getElementById('title').textContent    = ur?'عادت اور پیش رفت ٹریکر':'Habit & Progress Tracker';
+      document.getElementById('subtitle').textContent = ur?'چھوڑنے کی تاریخ منتخب کریں اور روزانہ چیک‑ان کریں':'Pick your quit date and check in daily';
+      document.getElementById('quitLabel').textContent= ur?'چھوڑنے کی تاریخ:':'Quit date:';
+      document.getElementById('noSmokeLabel').textContent= ur?'آج میں نے سگریٹ نہیں پی':'I didn’t smoke today';
+      document.getElementById('btnSaveDay').textContent= ur?'محفوظ کریں':'Save';
+      document.getElementById('streakLabel').textContent= ur?'مسلسل دن:':'Streak:';
+      document.getElementById('streakHint').textContent= ur?'اگلا ہدف: 7 دن':'Next goal: 7 days';
+      document.getElementById('daysLabel').textContent  = ur?'چھوڑے گئے دن:':'Days since quit:';
+      document.getElementById('daysHint').textContent   = ur?'اگلا ہدف: 30 دن':'Next goal: 30 days';
+      document.getElementById('backApp').textContent    = ur?'ایپ مینو':'App Menu';
+      applyDirLang();
+    }
+    applyCopy(); hookLangButtons(applyCopy);
+
+    // logic
+    function recalc(){
+      const locale = fmtLocale();
+      const quitISO = document.getElementById('quitDate').value;
+      if(quitISO){
+        const d = Math.max(0, daysBetween(new Date(quitISO+'T00:00:00'), new Date()));
+        document.getElementById('daysSince').textContent = d.toLocaleString(locale);
+        document.getElementById('daysProgress').style.width = Math.min(100, Math.round((d/30)*100))+'%';
+      }
+      const checkins = LS.get('checkins', {});
+      let streak=0, cur=new Date();
+      for(;;){
+        const iso = cur.toISOString().slice(0,10);
+        if(checkins[iso]){ streak++; cur.setDate(cur.getDate()-1); } else break;
+      }
+      document.getElementById('streakValue').textContent = streak.toLocaleString(locale);
+      document.getElementById('streakProgress').style.width = Math.min(100, Math.round((streak/7)*100))+'%';
+    }
+    document.getElementById('quitDate').addEventListener('change', e=>{ LS.set('quitDate', e.target.value); recalc(); });
+    document.getElementById('btnSaveDay').addEventListener('click', ()=>{
+      const checked = document.getElementById('noSmokeToday').checked;
+      const d = todayISO(); const checkins = LS.get('checkins', {});
+      checkins[d] = !!checked; LS.set('checkins', checkins);
+      document.getElementById('noSmokeToday').checked = false; recalc();
+    });
+
+    // boot
+    const savedQuit = LS.get('quitDate',''); if(savedQuit) document.getElementById('quitDate').value = savedQuit;
+    recalc();
+  </script>
+</body>
+</html>

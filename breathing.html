@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Breathing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .breath-circle{width:160px;height:160px;border-radius:50%;margin:10px auto;background:radial-gradient(circle,#ffcccc,#ff4d4d);animation:breathe 8s ease-in-out infinite}
+    @keyframes breathe{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+    .timer{text-align:center;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="lang-toggle"><button id="btn-ur" class="lang-btn">اردو</button><button id="btn-en" class="lang-btn">English</button></div>
+  <section class="hero small-hero"><div class="hero-content"><h1 id="title">سانس کی مشق</h1><p id="subtitle">30 سیکنڈ پرسکون سانسیں</p></div></section>
+  <section class="app-section">
+    <div class="breath-circle"></div>
+    <div class="timer" id="timer">00:30</div>
+    <button class="cta-btn" id="start">شروع کریں</button>
+  </section>
+  <div style="text-align:center;margin:30px 0 60px"><a href="app.html" class="cta-btn" id="backApp">ایپ مینو</a></div>
+  <script src="js/common.js"></script>
+  <script>
+    let int=null; function start(){ stop(); let s=30; tick();
+      int=setInterval(()=>{ s--; tick(); if(s<=0) stop(); },1000);
+      function tick(){ const m=String(Math.floor(s/60)).padStart(2,'0'); const ss=String(s%60).padStart(2,'0'); document.getElementById('timer').textContent=`${m}:${ss}`;}
+    }
+    function stop(){ if(int){ clearInterval(int); int=null; } }
+    function applyCopy(){ const ur=currentLang()==='ur';
+      document.getElementById('title').textContent=ur?'سانس کی مشق':'Breathing';
+      document.getElementById('subtitle').textContent=ur?'30 سیکنڈ پرسکون سانسیں':'30‑second calm breathing';
+      document.getElementById('start').textContent=ur?'شروع کریں':'Start';
+      document.getElementById('backApp').textContent=ur?'ایپ مینو':'App Menu';
+      applyDirLang();
+    }
+    document.getElementById('start').addEventListener('click', start);
+    applyCopy(); hookLangButtons(applyCopy);
+  </script>
+</body>
+</html>
